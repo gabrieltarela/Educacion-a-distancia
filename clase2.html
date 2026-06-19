@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 2: El principio de atomicidad (1FN) - UTU</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #bdc3c7;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #ecf0f1;
+        }
+        .error-cell {
+            color: white;
+            font-weight: bold;
+            background-color: #e74c3c; /* Rojo para marcar el error */
+        }
+        .question-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffecb5;
+            padding: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .formal-definition {
+            background-color: #d1ecf1;
+            border-left: 5px solid #0c5460;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .risk-list {
+            background-color: #f8d7da;
+            border-left: 5px solid #721c24;
+            padding: 15px;
+        }
+        .practical-task {
+            background-color: #d4edda;
+            border-left: 5px solid #155724;
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #95a5a6;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Clase 2: El principio de atomicidad (1FN)</h1>
+    <p>Fundamentos del Modelo Relacional | 2º EMS - UTU</p>
+</header>
+
+<section>
+    <h2>1. Algo está mal: El problema del "caos"</h2>
+    <p>En la clase anterior aprendimos que cada fila debe ser única. Ahora, observa esta tabla de un sistema de ventas:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID_Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Artículos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>101</td>
+                <td>Ana Silva</td>
+                <td>15/06/2026</td>
+                <td>laptop, mouse, teclado</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="question-box">
+        ¿Puede la computadora sumar el precio de la laptop si está "pegada" al mouse y al teclado en la misma celda?
+    </div>
+</section>
+
+<section>
+    <h2>2. Identificando el Error</h2>
+    <p>Para un sistema informático, la celda resaltada en <strong>rojo</strong> representa un problema de procesamiento:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID_Pedido</th>
+                <th>Cliente</th>
+                <th>Artículos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>101</td>
+                <td>Ana Silva</td>
+                <td class="error-cell">laptop, mouse, teclado</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Este diseño impide que el software realice cálculos automáticos, búsquedas por producto o filtros de stock, ya que los datos están mezclados.</p>
+</section>
+
+<section>
+    <h2>3. Institucionalización: La Primera Forma Normal (1FN)</h2>
+    <p>Para que una base de datos sea profesional, debe cumplir con la regla de <strong>Atomicidad</strong>.</p>
+    
+    <div class="formal-definition">
+        <strong>Dominio Atómico:</strong> Cada celda de una tabla debe contener un <strong>único valor indivisible</strong> para el sistema. Se prohíben los "grupos repetitivos" (listas de valores dentro de una sola celda).
+    </div>
+    
+    <div class="formal-definition">
+        <strong>Primera Forma Normal (1FN):</strong> Una tabla está en 1FN si y solo si todos sus atributos son atómicos. Esto permite transformar el caos de la información primaria en una estructura lógica organizada.
+    </div>
+</section>
+
+<section>
+    <h2>4. ¿Para qué sirve y qué riesgos corremos?</h2>
+    <p><strong>¿Para qué sirve?</strong><br>
+    Permite que el sistema realice cálculos precisos, genere facturas automáticas y facilite la búsqueda de información individualizada.</p>
+    
+    <div class="risk-list">
+        <strong>Riesgos de no aplicar la 1FN:</strong>
+        <ul>
+            <li><strong>Imposibilidad técnica:</strong> El software no puede operar con los datos de forma individual.</li>
+            <li><strong>Redundancia y desorden:</strong> Se genera un "caos informativo" que dificulta el mantenimiento.</li>
+            <li><strong>Inconsistencia:</strong> Es extremadamente difícil actualizar un solo producto si está mezclado con otros.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="practical-task">
+    <h2>5. ¡Ahora te toca a ti! (Situación de Acción)</h2>
+    <p><strong>Consigna:</strong> Toma la tabla de PEDIDOS anterior y reconstrúyela para que cumpla con la 1FN.</p>
+    
+    <p><strong>Pista de ayuda:</strong> Si cada producto tuviera un precio distinto, ¿dónde escribirías el precio de la laptop sin que se confunda con el del mouse? Debes "romper" la celda multievaluada para que cada producto ocupe su propio lugar.</p>
+    
+    <p><strong>Tu objetivo:</strong> Diseña la nueva tabla indicando las columnas y cómo quedarían los datos organizados de forma atómica.</p>
+</section>
+
+
+
+</body>
+</html>
