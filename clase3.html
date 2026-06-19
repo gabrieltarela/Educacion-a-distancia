@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 3: Dependencias Funcionales (DF) - UTU</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fdfefe;
+        }
+        header {
+            background-color: #8e44ad;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        h2 {
+            color: #8e44ad;
+            border-bottom: 2px solid #f4ecf7;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f9f9f9;
+        }
+        .error-text {
+            color: #e74c3c;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .highlight-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .formal-box {
+            background-color: #ebf5fb;
+            border-left: 5px solid #2e86c1;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .risk-box {
+            background-color: #fdedec;
+            border-left: 5px solid #cb4335;
+            padding: 15px;
+        }
+        .challenge-box {
+            background-color: #e9f7ef;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+        }
+        .arrow {
+            font-weight: bold;
+            color: #2e86c1;
+            font-size: 1.2em;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Clase 3: Dependencias Funcionales (DF)</h1>
+    <p>La Brújula de los Datos | 2º EMS - Bachillerato Tecnológico UTU</p>
+</header>
+
+<section>
+    <h2>1. Algo está mal: El problema de la incertidumbre</h2>
+    <p>Imagina que buscas la información de un estudiante llamado "Diego" en la siguiente tabla:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>CI</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Diego</td>
+                <td>4.567.890-1</td>
+                <td>Salto</td>
+            </tr>
+            <tr>
+                <td>Diego</td>
+                <td>3.214.555-8</td>
+                <td>Rivera</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box" style="text-align: center; font-style: normal;">
+        <strong>Pregunta disparadora:</strong> Si te pido los datos de "Diego", ¿podés darlos sin temor a equivocarte?
+    </div>
+</section>
+
+<section>
+    <h2>2. Identificando el Error</h2>
+    <p>En el diseño lógico, los nombres resaltados en <span class="error-text">rojo</span> nos indican una falla de determinación:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>CI</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="error-text">Diego</td>
+                <td>4.567.890-1</td>
+                <td>Salto</td>
+            </tr>
+            <tr>
+                <td class="error-text">Diego</td>
+                <td>3.214.555-8</td>
+                <td>Rivera</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>El problema es que el nombre <strong>no determina</strong> de forma única a la persona. Existe una incertidumbre que hace que el sistema no sea confiable para recuperar información específica.</p>
+</section>
+
+<section>
+    <h2>3. Metáfora Didáctica: La Dirección Postal</h2>
+    <div class="highlight-box">
+        <p>"Conocer el <strong>número de puerta</strong> (determinante) nos lleva de forma única a una <strong>casa específica</strong> (atributo determinado). No hay dos casas distintas con el mismo número en la misma calle. El número tiene el 'poder' de decirnos exactamente qué casa es".</p>
+    </div>
+    <p>En bases de datos, buscamos esa misma relación: un dato que nos permita conocer otros sin posibilidad de error.</p>
+</section>
+
+<section>
+    <h2>4. Institucionalización: Definición Formal</h2>
+    <p>Pasamos de la metáfora al lenguaje técnico profesional:</p>
+    
+    <div class="formal-box">
+        <strong>Dependencia Funcional (DF):</strong> Decimos que un atributo <strong>B</strong> depende funcionalmente de un atributo <strong>A</strong> (se escribe <span class="arrow">A &rarr; B</span>) si conocer el valor de A nos permite determinar de forma única y sin errores el valor de B.
+    </div>
+    
+    <div class="formal-box">
+        <strong>Notación de Flechas:</strong> El diagrama de flechas es nuestra herramienta de diagnóstico técnico. La flecha siempre sale del <em>determinante</em> hacia el <em>dato determinado</em>.
+    </div>
+</section>
+
+<section>
+    <h2>5. ¿Para qué sirve y qué riesgos corremos?</h2>
+    <p><strong>¿Para qué sirve?</strong><br>
+    Funciona como un filtro lógico para organizar los datos. Nos permite saber qué información está bien ubicada y qué información "sobra" o genera confusión.</p>
+    
+    <div class="risk-box">
+        <strong>Riesgos de no usar Dependencias Funcionales:</strong>
+        <ul>
+            <li><strong>Redundancia:</strong> Repetir datos innecesariamente (ej. escribir el nombre de un departamento mil veces).</li>
+            <li><strong>Inconsistencia:</strong> Si un dato cambia en un lugar pero no en su determinante, la base de datos empieza a "mentir".</li>
+            <li><strong>Pérdida de integridad:</strong> El sistema deja de ser una fuente confiable para la toma de decisiones.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="challenge-box">
+    <h2>6. Desafío Práctico: Situación de Acción</h2>
+    <p><strong>Consigna:</strong> Dada la tabla <strong>CIUDADANO</strong> con los siguientes atributos:</p>
+    <p style="text-align: center;"><code>(CI, Nombre, Fecha_Nac, Departamento, Capital_Dep)</code></p>
+    
+    <p><strong>Tu tarea es:</strong></p>
+    <ol>
+        <li>Diagramar con flechas las dependencias que encuentres.</li>
+        <li>Responder: ¿La relación <span class="arrow">CI &rarr; Nombre</span> es válida? ¿Por qué?</li>
+        <li>Detectar: ¿Existe alguna relación de dependencia entre el <strong>Departamento</strong> y la <strong>Capital</strong>?</li>
+    </ol>
+    <p><em>Pista: Si yo te doy un número de CI, ¿podrías decirme el nombre de la persona sin temor a equivocarte?</em></p>
+</section>
+
+
+</body>
+</html>
