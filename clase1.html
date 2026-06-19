@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 1: La identidad única (Claves) - UTU</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .error-row {
+            color: #d9534f;
+            font-weight: bold;
+            background-color: #f9ebeb;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 5px solid #ffecb5;
+            font-style: italic;
+        }
+        .concept-box {
+            background-color: #e7f3ff;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .challenge {
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Clase 1: La identidad única (Claves)</h1>
+    <p>Bachillerato Tecnológico - 2º EMS | DGETP-UTU</p>
+</header>
+
+<section>
+    <h2>1. El Problema: ¿Podemos distinguir estos datos?</h2>
+    <p>Imagina que eres el administrador de la base de datos de una institución y recibes la siguiente lista de alumnos inscritos:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>12/05/2007</td>
+            </tr>
+            <tr>
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>12/05/2007</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><strong>Pregunta:</strong> Si el sistema debe asignar una beca a uno de ellos, ¿cómo sabe si son dos personas distintas o si alguien cometió un error al ingresar los datos?.</p>
+</section>
+
+<section>
+    <h2>2. Identificando el Error</h2>
+    <p>En el diseño profesional de bases de datos, la <strong>falta de unicidad</strong> es un error crítico. Resaltamos en rojo los datos que causan incertidumbre:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="error-row">
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>12/05/2007</td>
+            </tr>
+            <tr class="error-row">
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>12/05/2007</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Sin un atributo diferenciador, el sistema no puede garantizar la <strong>integridad</strong> de la información.</p>
+</section>
+
+<section>
+    <h2>3. Metáfora Didáctica: El Número de Puerta</h2>
+    <div class="highlight">
+        <p>"Imaginen una calle donde todas las casas son idénticas. ¿Cómo sabe el cartero dónde entregar una carta? Utiliza el <strong>número de puerta</strong>. Ese número es único para esa casa; no hay dos casas con el mismo número en esa cuadra".</p>
+    </div>
+    <p>En las bases de datos, las tablas funcionan igual: necesitamos un "número de puerta" (clave) que nos lleve de forma inequívoca a una sola fila (tupla).</p>
+</section>
+
+<section>
+    <h2>4. Institucionalización: Definiciones Técnicas</h2>
+    <p>El diseño lógico es un proceso de refinamiento que va desde lo general a lo específico:</p>
+    
+    <div class="concept-box">
+        <strong>Superclave:</strong> Es cualquier conjunto de uno o más atributos que, tomados colectivamente, nos permiten identificar de forma única una fila en la tabla.
+    </div>
+    
+    <div class="concept-box">
+        <strong>Clave Candidata:</strong> Es una superclave que cumple con el criterio de <strong>minimalidad</strong>. Esto significa que es el conjunto mínimo de datos necesarios para identificar la fila; si le quitamos un dato, deja de ser clave.
+    </div>
+    
+    <div class="concept-box">
+        <strong>Clave Primaria (PK):</strong> Es la clave candidata que el diseñador elige formalmente para ser el identificador oficial de la tabla. Se encarga de garantizar que no existan tuplas duplicadas.
+    </div>
+</section>
+
+<section>
+    <h2>5. ¿Para qué sirve y qué riesgos corremos?</h2>
+    <p>Establecer una identidad única permite que el sistema sea eficiente y profesional.</p>
+    <ul>
+        <li><strong>Sirve para:</strong> Garantizar la integridad de los datos y permitir que el software recupere información específica sin errores.</li>
+        <li><strong>Riesgos de no usar formalidad:</strong>
+            <ul>
+                <li><strong>Redundancia:</strong> Repetición innecesaria de información que ocupa espacio.</li>
+                <li><strong>Inconsistencia:</strong> Si actualizamos un dato duplicado en un lugar pero no en el otro, la base de datos contendrá información contradictoria.</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<section class="challenge">
+    <h2>6. Desafío Práctico: Registro Automotor</h2>
+    <p>Dada la siguiente tabla de <strong>VEHÍCULO</strong> con sus atributos:</p>
+    <p><code>(Matrícula, Número_Chasis, Marca, Modelo, Color, CI_Dueño)</code></p>
+    <p><strong>Tarea:</strong></p>
+    <ol>
+        <li>Identifica <strong>3 Superclaves</strong> posibles.</li>
+        <li>Lista todas las <strong>Claves Candidatas</strong> (recuerda la minimalidad).</li>
+        <li>Selecciona la <strong>Clave Primaria (PK)</strong> y justifica tu elección.</li>
+    </ol>
+</section>
+
+</body>
+</html>
