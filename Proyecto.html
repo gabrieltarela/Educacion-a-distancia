@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 6: Evaluación Integradora - El Desafío de la Biblioteca</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #f2f4f7; }
+        header { background-color: #27ae60; color: white; padding: 30px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
+        .intro-box { background-color: #ffffff; padding: 25px; border-radius: 8px; border-left: 8px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .data-list { background-color: #fdfefe; border: 2px dashed #bdc3c7; padding: 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #2c3e50; text-align: center; }
+        section { background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        h2 { color: #27ae60; border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; }
+        .instruction-step { display: flex; align-items: flex-start; margin-bottom: 15px; }
+        .step-number { background-color: #27ae60; color: white; border-radius: 50%; min-width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold; }
+        .warning-box { background-color: #fdf2f2; border-left: 5px solid #e74c3c; padding: 15px; margin: 20px 0; font-size: 0.9em; }
+        .reflection-box { background-color: #e8f8f5; border-left: 5px solid #1abc9c; padding: 20px; margin-top: 30px; }
+        footer { text-align: center; font-size: 0.8em; color: #7f8c8d; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Clase 6: Evaluación Integradora (SAD)</h1>
+    <p>Proyecto Final: Diseño de una Biblioteca Profesional</p>
+</header>
+
+<div class="intro-box">
+    <h2>El Escenario</h2>
+    <p>Has sido contratado para organizar el sistema de información de una <strong>pequeña biblioteca</strong>. Actualmente, el bibliotecario registra todo de forma desordenada en una sola lista de Excel. Tu misión es aplicar el <strong>algoritmo de refinamiento</strong> que hemos estudiado para transformar este caos en una base de datos eficiente, profesional y sin errores.</p>
+</div>
+
+<section>
+    <h2>1. La Información Primaria (El Caos)</h2>
+    <p>Este es el listado de atributos que el bibliotecario tiene mezclados en una sola estructura:</p>
+    <div class="data-list">
+        (Libro, Autor, Nacionalidad_Autor, Editorial, Socio, Fecha_Préstamo)
+    </div>
+    <div class="warning-box">
+        <strong>¡Atención!</strong> Este diseño actual genera anomalías: por ejemplo, si borras a un socio, ¡podrías perder la información del libro que tenía prestado! Tu objetivo es evitar esto mediante la normalización.
+    </div>
+</section>
+
+<section>
+    <h2>2. Tu Desafío: Consigna de Trabajo</h2>
+    <p>En subgrupos, deben resolver el problema siguiendo estos pasos técnicos:</p>
+    
+    <div class="instruction-step">
+        <div class="step-number">1</div>
+        <div><strong>Identidad Única:</strong> Define las Claves Primarias (PK) necesarias para cada entidad, garantizando el criterio de minimalidad.</div>
+    </div>
+    
+    <div class="instruction-step">
+        <div class="step-number">2</div>
+        <div><strong>Atomicidad (1FN):</strong> Asegúrate de que cada celda contenga un valor único e indivisible. No se permiten listas de autores o libros en una misma celda.</div>
+    </div>
+    
+    <div class="instruction-step">
+        <div class="step-number">3</div>
+        <div><strong>Especialización (2FN):</strong> Elimina cualquier dependencia parcial. Si un dato depende solo de una "parte" de una clave compuesta, sepáralo en una nueva tabla.</div>
+    </div>
+    
+    <div class="instruction-step">
+        <div class="step-number">4</div>
+        <div><strong>Determinación Directa (3FN):</strong> Elimina el "efecto dominó" o dependencias transitivas. Cada dato debe estar exclusivamente donde su determinante directo se encuentra.</div>
+    </div>
+</section>
+
+<section>
+    <h2>3. Producto Final</h2>
+    <p>Deben entregar un <strong>esquema relacional optimizado</strong> (diagrama de tablas y flechas) que represente visualmente la estructura normalizada de la biblioteca.</p>
+</section>
+
+<div class="reflection-box">
+    <h2>Preguntas de Metacognición</h2>
+    <p>Al finalizar su diseño, respondan grupalmente:</p>
+    <ul>
+        <li>¿En qué momento del proceso se dieron cuenta de que una tabla necesitaba ser "partida" para ser más eficiente?.</li>
+        <li>¿Qué anomalías de datos (errores al borrar o actualizar) lograron evitar con su diseño final?.</li>
+    </ul>
+</div>
+
+
+</body>
+</html>
