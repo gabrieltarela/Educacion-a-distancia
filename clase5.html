@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 5: Tercera Forma Normal (3FN) - UTU</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #fdfefe; }
+        header { background-color: #c0392b; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
+        section { background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        h2 { color: #c0392b; border-bottom: 2px solid #f9ebea; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+        table, th, td { border: 1px solid #ddd; text-align: center; }
+        th, td { padding: 12px; }
+        th { background-color: #fdf2f2; }
+        .error-cell { color: white; font-weight: bold; background-color: #e74c3c; }
+        .question-box { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 20px 0; font-weight: bold; }
+        .formal-box { background-color: #ebf5fb; border-left: 5px solid #2e86c1; padding: 15px; margin: 10px 0; }
+        .risk-box { background-color: #fdedec; border-left: 5px solid #cb4335; padding: 15px; }
+        .practical-task { background-color: #e9f7ef; border-left: 5px solid #27ae60; padding: 20px; }
+        .arrow { font-weight: bold; color: #2e86c1; font-size: 1.1em; }
+        footer { text-align: center; font-size: 0.8em; color: #7f8c8d; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Clase 5: Tercera Forma Normal (3FN)</h1>
+    <p>Eliminando el Efecto Dominó | 2º EMS - Bachillerato Tecnológico UTU</p>
+</header>
+
+<section>
+    <h2>1. Algo está mal: ¿Quién conoce a quién?</h2>
+    <p>Observa esta tabla de <strong>FACTURAS</strong> de una empresa. Nota cómo se registran los datos del vendedor en cada venta:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Num_Fact (PK)</th>
+                <th>Fecha</th>
+                <th>ID_Vendedor</th>
+                <th>Nombre_Vendedor</th>
+                <th>Ciudad_Vendedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1001</td>
+                <td>19/06/2026</td>
+                <td>V-05</td>
+                <td>Carlos Sosa</td>
+                <td>Montevideo</td>
+            </tr>
+            <tr>
+                <td>1002</td>
+                <td>20/06/2026</td>
+                <td>V-05</td>
+                <td>Carlos Sosa</td>
+                <td>Montevideo</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="question-box">
+        ¿Conoce la factura el nombre del vendedor directamente o lo conoce a través de su código (ID_Vendedor)? <br>
+        Si el vendedor se cambia de ciudad, ¿en cuántas facturas tendríamos que corregir ese dato?
+    </div>
+</section>
+
+<section>
+    <h2>2. Identificando el Error</h2>
+    <p>En el diseño profesional, los datos resaltados en <strong>rojo</strong> están sobrando en esta tabla:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Num_Fact (PK)</th>
+                <th>ID_Vendedor</th>
+                <th>Nombre_Vendedor</th>
+                <th>Ciudad_Vendedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1001</td>
+                <td>V-05</td>
+                <td class="error-cell">Carlos Sosa</td>
+                <td class="error-cell">Montevideo</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Existe una <strong>Dependencia Transitiva</strong>: El nombre depende del vendedor, y el vendedor depende de la factura. Esto genera una reacción en cadena que ensucia el diseño [3].</p>
+</section>
+
+<section>
+    <h2>3. Institucionalización: Tercera Forma Normal (3FN)</h2>
+    <div class="formal-box">
+        <strong>Dependencia Transitiva:</strong> Es aquella donde un atributo no clave depende de otro atributo que tampoco es clave [1]. <br>
+        Esquema: <span class="arrow">A &rarr; B &rarr; C</span> (Donde A es la PK, pero C depende de B).
+    </div>
+    
+    <div class="formal-box">
+        <strong>Regla de Oro de la 3FN:</strong> Una tabla está en 3FN si ya está en 2FN y no permite este "efecto dominó". Cada dato debe estar ubicado exclusivamente donde su determinante directo está [1].
+    </div>
+</section>
+
+<section>
+    <h2>4. ¿Para qué sirve y qué riesgos corremos?</h2>
+    <p><strong>¿Para qué sirve?</strong><br>
+    Sirve para finalizar el proceso de refinamiento de la base de datos, asegurando que no existan anomalías de borrado o actualización [4].</p>
+    
+    <div class="risk-box">
+        <strong>Riesgos de no usar la 3FN:</strong>
+        <ul>
+            <li><strong>Anomalías de Actualización:</strong> Si el vendedor cambia de ciudad, debemos modificar miles de facturas en lugar de un solo registro de vendedor.</li>
+            <li><strong>Redundancia Extrema:</strong> Repetimos datos biográficos del vendedor en cada venta realizada.</li>
+            <li><strong>Inconsistencia:</strong> El sistema puede terminar diciendo que el mismo vendedor vive en dos ciudades distintas si olvidamos actualizar una fila.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="practical-task">
+    <h2>5. Desafío Práctico: Rompiendo la Transitividad</h2>
+    <p><strong>Consigna:</strong> Toma la tabla <strong>FACTURA</strong> y realiza la normalización completa hasta la 3FN.</p>
+    
+    <p><strong>Pasos a seguir:</strong></p>
+    <ol>
+        <li>Dibuja el esquema de flechas: <span class="arrow">Num_Fact &rarr; ID_Vendedor</span> y <span class="arrow">ID_Vendedor &rarr; Nombre</span> [3].</li>
+        <li>Identifica el "puente" (el atributo que hace de intermediario).</li>
+        <li>Divide la tabla en dos: una para la <strong>VENTA</strong> y otra para el <strong>VENDEDOR</strong>.</li>
+    </ol>
+    <p><em>Pista: Sigue el flujo del dato con el dedo; si para llegar al nombre primero debes pasar por el ID, ¡hay transitividad! [5].</em></p>
+</section>
+
+<footer>
+    <p>Basado en Date (2001) y Elmasri & Navathe (2017). <br> Material pedagógico para 2º EMS - UTU.</p>
+</footer>
+
+</body>
+</html>
