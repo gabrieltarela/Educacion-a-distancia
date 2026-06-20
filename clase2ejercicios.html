@@ -3,231 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica Clase 1: El ADN de los Datos</title>
-    <!-- Importamos una fuente moderna desde Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Práctica Clase 2: El Poder de lo Atómico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg-color: #f0f4f8;
-            --card-bg: #ffffff;
-            --text-dark: #2d3748;
-            --text-muted: #4a5568;
-            --accent-purple: #764ba2;
-            --accent-green: #48bb78;
-            --accent-orange: #ed8936;
-            --danger: #c53030;
+            --neon-blue: #00d2ff;
+            --neon-pink: #ff007f;
+            --dark-bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text-color: #e94560;
+            --white: #ffffff;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--white);
             margin: 0;
             padding: 40px 20px;
-            color: var(--text-dark);
             display: flex;
             justify-content: center;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 850px;
             width: 100%;
         }
 
-        /* Header con degradado */
-        .header-card {
-            background: var(--primary-gradient);
-            color: white;
+        /* Header Estilo Gamer/Tech */
+        .header-box {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
             margin-bottom: 40px;
         }
 
-        .header-card h1 {
+        .header-box h1 {
             margin: 0;
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            font-size: 35px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #000;
         }
 
-        .header-card p {
-            opacity: 0.9;
+        .header-box p {
             font-size: 18px;
-            margin-top: 10px;
             font-weight: 400;
+            margin-top: 10px;
+            color: #fff;
         }
 
-        /* Estilo de los ejercicios */
-        .exercise-list {
+        /* Tarjetas de Ejercicios */
+        .card-container {
             display: grid;
             gap: 25px;
         }
 
-        .exercise-card {
+        .card {
             background: var(--card-bg);
+            border: 2px solid var(--neon-blue);
             border-radius: 20px;
             padding: 30px;
-            border-left: 10px solid var(--accent-purple);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
         }
 
-        .exercise-card:hover {
+        .card:hover {
+            box-shadow: 0 0 25px var(--neon-blue);
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        .badge {
-            background-color: var(--accent-purple);
-            color: white;
-            padding: 6px 15px;
+        .level-tag {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: var(--neon-pink);
+            padding: 5px 15px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
             text-transform: uppercase;
         }
 
-        .exercise-title {
+        .card h2 {
+            color: var(--neon-blue);
             font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: var(--text-dark);
+            margin-top: 0;
         }
 
-        .data-box {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 12px;
+        .code-snippet {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 15px;
-            font-weight: bold;
-            color: #2d3748;
-            border: 2px dashed #cbd5e0;
+            font-size: 14px;
             margin: 20px 0;
-            text-align: center;
+            border-left: 4px solid var(--neon-pink);
         }
 
-        .tasks {
+        .challenge-list {
             list-style: none;
             padding: 0;
         }
 
-        .tasks li {
+        .challenge-list li {
             margin-bottom: 15px;
-            padding-left: 30px;
+            padding-left: 35px;
             position: relative;
-            font-size: 16px;
-            line-height: 1.5;
         }
 
-        .tasks li::before {
-            content: '⚡';
+        .challenge-list li::before {
+            content: '🔥';
             position: absolute;
             left: 0;
-            color: var(--accent-green);
-            font-weight: bold;
         }
 
-        .tasks strong {
-            color: var(--accent-purple);
+        .warning-box {
+            background: rgba(255, 0, 127, 0.1);
+            border: 1px solid var(--neon-pink);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 13px;
         }
 
-        /* Tip final */
-        .pro-tip {
-            background: #fff5f5;
-            border: 1px solid #feb2b2;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 25px;
-            font-size: 14px;
-            color: var(--danger);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .pro-tip strong {
-            font-size: 18px;
-        }
-
-        @media (max-width: 600px) {
-            .header-card h1 { font-size: 24px; }
-            .exercise-card { padding: 20px; }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 12px;
+            color: #533483;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Encabezado Principal -->
-    <header class="header-card">
-        <h1>🚀 Misión: El ADN de los Datos</h1>
-        <p>Unidad: Fundamentos del Modelo Relacional<br>Clase 1: Dominando las Claves</p>
-    </header>
+    <div class="header-box">
+        <h1>💥 Misión: Rompiendo el Caos</h1>
+        <p>Clase 2: El Principio de Atomicidad (1FN)</p>
+    </div>
 
-    <main class="exercise-list">
+    <div class="card-container">
         <!-- Ejercicio 1 -->
-        <article class="exercise-card">
-            <span class="badge">Nivel: Explorador</span>
-            <div class="exercise-title">📍 1. El Registro del Instituto</div>
-            <p>El sistema de gestión de alumnos de tu centro de estudios está hecho un caos. El bedel te entrega esta lista de atributos para que pongas orden:</p>
-            
-            <div class="data-box">
-                (CI, Nombre, Apellido, Fecha_Nacimiento, Email_Institucional, Numero_Carnet_Biblioteca)
+        <div class="card">
+            <span class="level-tag">Cómputo Real</span>
+            <h2>🛒 1. El Carrito "Pegoteado"</h2>
+            <p>Un sistema de ventas guarda los pedidos así (todo junto en una celda):</p>
+            <div class="code-snippet">
+                ID: 101 | Cliente: Ana Silva | Productos: Monitor, Teclado, Mouse
             </div>
-
-            <ul class="tasks">
-                <li><strong>Tarea A:</strong> Identifica al menos 3 <strong>Superclaves</strong> (cualquier conjunto de datos que garantice que la fila es única) [1, 2].</li>
-                <li><strong>Tarea B:</strong> Aplica el criterio de <strong>Minimalidad</strong>: ¿Cuáles de esas superclaves son realmente <strong>Claves Candidatas</strong>? [3].</li>
-                <li><strong>Tarea C:</strong> Elige la <strong>PK (Clave Primaria)</strong> definitiva y justifica por qué es la mejor opción para identificar a un estudiante [2].</li>
+            <ul class="challenge-list">
+                <li><strong>Reto Técnico:</strong> El Monitor cuesta $200 y el Teclado $50. ¿Cómo puede la PC sumar el total si están en la misma celda?</li>
+                <li><strong>Acción:</strong> "Rompe" esa celda multievaluada para cumplir con la **1FN**.</li>
             </ul>
-        </article>
+        </div>
 
         <!-- Ejercicio 2 -->
-        <article class="exercise-card" style="border-left-color: var(--accent-orange);">
-            <span class="badge" style="background-color: var(--accent-orange);">Nivel: Tech Master</span>
-            <div class="exercise-title">📱 2. Tech-Store Inventory</div>
-            <p>En una tienda de celulares de Mercedes, necesitan identificar cada equipo para que no haya errores en la garantía. Los datos son:</p>
-            
-            <div class="data-box">
-                (Numero_IMEI, Numero_Serie, Marca, Modelo, Color, Codigo_Inventario_Interno)
+        <div class="card" style="border-color: var(--neon-pink);">
+            <span class="level-tag" style="background: var(--neon-blue);">Admin Pro</span>
+            <h2>📱 2. Contactos al Límite</h2>
+            <p>Tu base de datos de proveedores tiene este problema en la columna de teléfonos:</p>
+            <div class="code-snippet">
+                Proveedor: Tech-Uy | Teléfonos: 099123456, 24001122, 098765432
             </div>
-
-            <ul class="tasks">
-                <li><strong>Tarea A:</strong> Sabiendo que el IMEI y el Número de Serie son únicos por hardware, ¿cuántas <strong>Claves Candidatas</strong> tiene esta tabla? [2].</li>
-                <li><strong>Tarea B:</strong> Si unimos <code>(IMEI + Marca)</code>, ¿estamos ante una Candidata o una <strong>Superclave</strong>? Explica usando el concepto de conjunto mínimo [3].</li>
-                <li><strong>Tarea C:</strong> Selecciona la <strong>PK</strong> que consideres más eficiente para el manejo rápido en el mostrador.</li>
+            <ul class="challenge-list">
+                <li><strong>El Conflicto:</strong> Necesitas enviar un SMS automático. ¿Cómo detecta el sistema el primer número sin confundirse con el resto?</li>
+                <li><strong>Acción:</strong> Reconstruye la tabla aplicando **Dominio Atómico**.</li>
             </ul>
-        </article>
+        </div>
 
         <!-- Ejercicio 3 -->
-        <article class="exercise-card" style="border-left-color: var(--accent-green);">
-            <span class="badge" style="background-color: var(--accent-green);">Nivel: Pro Designer</span>
-            <div class="exercise-title">🚌 3. Bus-Master: Control de Flota</div>
-            <p>Para la gestión técnica de una empresa de transporte interdepartamental, se maneja la siguiente estructura de datos:</p>
-            
-            <div class="data-box">
-                (Matricula, Numero_Padron, Capacidad, Marca_Motor, Año_Fabricacion)
+        <div class="card">
+            <span class="level-tag">Data Master</span>
+            <h2>🎮 3. Hobby-Games Challenge</h2>
+            <p>En el club de juegos, la tabla de socios se ve así:</p>
+            <div class="code-snippet">
+                Socio: Diego | Categorías: Estrategia, Rol, Acción
             </div>
-
-            <ul class="tasks">
-                <li><strong>Tarea A:</strong> ¿Podría la <code>Marca_Motor</code> ser parte de una clave identificatoria? ¿Por qué sí o por qué no? [4].</li>
-                <li><strong>Tarea B:</strong> Encuentra todas las <strong>Claves Candidatas</strong> que impidan que el sistema registre dos buses iguales por error [2].</li>
-                <li><strong>Tarea C:</strong> <strong>Análisis Crítico:</strong> ¿Qué problemas de integridad (errores de datos) causaríamos si el sistema no tuviera una PK definida? [5].</li>
+            <ul class="challenge-list">
+                <li><strong>El Problema:</strong> Queremos buscar solo a los socios de "Rol". ¿Por qué tener todo junto impide una búsqueda precisa?</li>
+                <li><strong>Acción:</strong> Transforma este "caos" en un diseño óptimo para el procesamiento automático.</li>
             </ul>
-            
-            <div class="pro-tip">
-                <strong>🔥</strong> <span><strong>PRO-TIP:</strong> La Clave Primaria es como el "Número de Puerta" de una casa; te asegura llegar a un lugar único sin temor a equivocarte [4, 6].</span>
+            <div class="warning-box">
+                <strong>💡 RECUERDA:</strong> La 1FN prohíbe los grupos repetitivos. Cada celda debe ser un valor único e indivisible.
             </div>
-        </article>
-    </main>
+        </div>
+    </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #95a5a6; font-size: 12px;">
-        <p>Material elaborado bajo los fundamentos de Date (2001) y Elmasri & Navathe (2017).</p>
+    <footer>
+        <p>Bases de Datos - 2º EMS | Referencia: Brousseau (1997) & Galperin (1982)</p>
     </footer>
 </div>
 
