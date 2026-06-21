@@ -4,196 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Práctica Clase 2: El Poder de lo Atómico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+    <!-- Fuente moderna y profesional -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00d2ff;
-            --neon-pink: #ff007f;
-            --dark-bg: #1a1a2e;
-            --card-bg: #16213e;
-            --text-color: #e94560;
+            --bg-soft: #f8fafc;
             --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --primary: #2563eb;
+            --primary-soft: #dbeafe;
+            --accent: #0f172a;
+            --border: #e2e8f0;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-main);
             margin: 0;
             padding: 40px 20px;
             display: flex;
             justify-content: center;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 850px;
+            max-width: 800px;
             width: 100%;
         }
 
-        /* Header Estilo Gamer/Tech */
-        .header-box {
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+        /* Header con fondo claro y borde suave */
+        .header-section {
+            background-color: var(--white);
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
-            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
 
-        .header-box h1 {
+        .header-section h1 {
             margin: 0;
-            font-size: 35px;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px #000;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.025em;
         }
 
-        .header-box p {
+        .header-section p {
             font-size: 18px;
-            font-weight: 400;
             margin-top: 10px;
-            color: #fff;
+            color: var(--primary);
+            font-weight: 500;
         }
 
-        /* Tarjetas de Ejercicios */
-        .card-container {
-            display: grid;
-            gap: 25px;
+        /* Tarjetas de Ejercicios en tonos claros */
+        .exercise-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 2px solid var(--neon-blue);
-            border-radius: 20px;
+        .exercise-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s;
+            transition: all 0.2s ease;
         }
 
-        .card:hover {
-            box-shadow: 0 0 25px var(--neon-blue);
-            transform: translateY(-5px);
+        .exercise-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
-        .level-tag {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: var(--neon-pink);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: bold;
+        .level-pill {
+            display: inline-block;
+            background: var(--primary-soft);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
-        .card h2 {
-            color: var(--neon-blue);
-            font-size: 22px;
-            margin-top: 0;
+        .exercise-card h2 {
+            font-size: 20px;
+            color: var(--accent);
+            margin: 0 0 15px 0;
         }
 
-        .code-snippet {
-            background: #0f3460;
+        /* Bloque de datos tipo terminal pero en colores suaves */
+        .data-display {
+            background: #f1f5f9;
             padding: 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
+            border-radius: 8px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
             font-size: 14px;
-            margin: 20px 0;
-            border-left: 4px solid var(--neon-pink);
+            margin: 15px 0;
+            color: var(--text-main);
+            border-left: 4px solid var(--primary);
         }
 
-        .challenge-list {
+        .task-list {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        .challenge-list li {
-            margin-bottom: 15px;
-            padding-left: 35px;
+        .task-list li {
+            margin-bottom: 12px;
+            padding-left: 28px;
             position: relative;
+            font-size: 15px;
         }
 
-        .challenge-list li::before {
-            content: '🔥';
+        .task-list li::before {
+            content: "→";
             position: absolute;
             left: 0;
+            color: var(--primary);
+            font-weight: bold;
         }
 
-        .warning-box {
-            background: rgba(255, 0, 127, 0.1);
-            border: 1px solid var(--neon-pink);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 13px;
+        /* Cuadro de recomendación/alerta */
+        .info-note {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         footer {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 40px;
             font-size: 12px;
-            color: #533483;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .header-section h1 { font-size: 24px; }
+            .exercise-card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-box">
-        <h1>💥 Misión: Rompiendo el Caos</h1>
+    <header class="header-section">
+        <h1>Misión: Rompiendo el Caos</h1>
         <p>Clase 2: El Principio de Atomicidad (1FN)</p>
-    </div>
+    </header>
 
-    <div class="card-container">
+    <div class="exercise-stack">
         <!-- Ejercicio 1 -->
-        <div class="card">
-            <span class="level-tag">Cómputo Real</span>
+        <article class="exercise-card">
+            <span class="level-pill">Cómputo Real</span>
             <h2>🛒 1. El Carrito "Pegoteado"</h2>
-            <p>Un sistema de ventas guarda los pedidos así (todo junto en una celda):</p>
-            <div class="code-snippet">
-                ID: 101 | Cliente: Ana Silva | Productos: Monitor, Teclado, Mouse
+            <p>Un sistema de ventas guarda los pedidos con grupos repetitivos en una sola celda:</p>
+            <div class="data-display">
+                ID: 101 | Cliente: Ana Silva | Productos: Laptop, Mouse, Teclado
             </div>
-            <ul class="challenge-list">
-                <li><strong>Reto Técnico:</strong> El Monitor cuesta $200 y el Teclado $50. ¿Cómo puede la PC sumar el total si están en la misma celda?</li>
-                <li><strong>Acción:</strong> "Rompe" esa celda multievaluada para cumplir con la **1FN**.</li>
+            <ul class="task-list">
+                <li><strong>Reto Técnico:</strong> El Monitor cuesta $200 y el Teclado $50. ¿Cómo puede la PC sumar el total si están pegados en la misma celda? [1],[2]</li>
+                <li><strong>Acción:</strong> Reconstruye la tabla para que cumpla con la <strong>1FN</strong>, eliminando los grupos repetitivos. [3],[4]</li>
             </ul>
-        </div>
+        </article>
 
         <!-- Ejercicio 2 -->
-        <div class="card" style="border-color: var(--neon-pink);">
-            <span class="level-tag" style="background: var(--neon-blue);">Admin Pro</span>
+        <article class="exercise-card">
+            <span class="level-pill">Admin Pro</span>
             <h2>📱 2. Contactos al Límite</h2>
-            <p>Tu base de datos de proveedores tiene este problema en la columna de teléfonos:</p>
-            <div class="code-snippet">
+            <p>La base de datos de proveedores tiene este problema de atomicidad en la columna de teléfonos:</p>
+            <div class="data-display">
                 Proveedor: Tech-Uy | Teléfonos: 099123456, 24001122, 098765432
             </div>
-            <ul class="challenge-list">
-                <li><strong>El Conflicto:</strong> Necesitas enviar un SMS automático. ¿Cómo detecta el sistema el primer número sin confundirse con el resto?</li>
-                <li><strong>Acción:</strong> Reconstruye la tabla aplicando **Dominio Atómico**.</li>
+            <ul class="task-list">
+                <li><strong>El Conflicto:</strong> Necesitas enviar un SMS automático. ¿Cómo detecta el sistema el primer número sin confundirse con los demás? [4]</li>
+                <li><strong>Acción:</strong> Aplica la restricción de <strong>Dominio Atómico</strong> para que cada celda sea un valor indivisible. [4],[5]</li>
             </ul>
-        </div>
+        </article>
 
         <!-- Ejercicio 3 -->
-        <div class="card">
-            <span class="level-tag">Data Master</span>
+        <article class="exercise-card">
+            <span class="level-pill">Data Master</span>
             <h2>🎮 3. Hobby-Games Challenge</h2>
-            <p>En el club de juegos, la tabla de socios se ve así:</p>
-            <div class="code-snippet">
+            <p>En el club de juegos, la tabla de socios presenta el siguiente desorden informativo:</p>
+            <div class="data-display">
                 Socio: Diego | Categorías: Estrategia, Rol, Acción
             </div>
-            <ul class="challenge-list">
-                <li><strong>El Problema:</strong> Queremos buscar solo a los socios de "Rol". ¿Por qué tener todo junto impide una búsqueda precisa?</li>
-                <li><strong>Acción:</strong> Transforma este "caos" en un diseño óptimo para el procesamiento automático.</li>
+            <ul class="task-list">
+                <li><strong>El Problema:</strong> Queremos buscar solo a los socios de "Rol". ¿Por qué tener todo junto impide una búsqueda precisa del sistema? [4]</li>
+                <li><strong>Acción:</strong> Transforma este caos en un diseño óptimo que permita el procesamiento automático de datos. [3],[2]</li>
             </ul>
-            <div class="warning-box">
-                <strong>💡 RECUERDA:</strong> La 1FN prohíbe los grupos repetitivos. Cada celda debe ser un valor único e indivisible.
+            
+            <div class="info-note">
+                <span>💡</span>
+                <strong>RECUERDA:</strong> La 1FN prohíbe los grupos repetitivos. Cada celda debe ser un valor único e indivisible para el sistema informático. [4]
             </div>
-        </div>
+        </article>
     </div>
 
     <footer>
-        <p>Bases de Datos - 2º EMS | Referencia: Brousseau (1997) & Galperin (1982)</p>
+        <p>Bases de Datos - 2º EMS | Basado en Brousseau (1997) & Galperin (1982) [6]</p>
     </footer>
 </div>
 
