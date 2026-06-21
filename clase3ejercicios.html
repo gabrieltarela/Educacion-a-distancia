@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misión Clase 3: El GPS de los Datos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-soft: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+            --border: #e2e8f0;
+            --hint-bg: #fffbeb;
+            --hint-text: #92400e;
+            --success-bg: #f0fdf4;
+            --success-text: #166534;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 800px; width: 100%; }
+
+        .header-section {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 { margin: 0; font-size: 32px; font-weight: 800; color: var(--primary); }
+        .header-section p { font-size: 18px; margin-top: 10px; color: var(--accent); font-weight: 500; }
+
+        .exercise-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .level-pill {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .schema-box {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent);
+            text-align: center;
+        }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-pista { background-color: #fef3c7; color: #92400e; }
+        .btn-pista:hover { background-color: #fde68a; }
+
+        .btn-respuesta { background-color: #dcfce7; color: #166534; }
+        .btn-respuesta:hover { background-color: #bbf7d0; }
+
+        .content-hidden {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .pista-box { background-color: var(--hint-bg); border: 1px solid #fef3c7; color: var(--hint-text); }
+        .respuesta-box { background-color: var(--success-bg); border: 1px solid #dcfce7; color: var(--success-text); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        footer { text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header-section">
+        <h1>Misión: El GPS de los Datos</h1>
+        <p>Clase 3: Dependencias Funcionales (DF)</p>
+    </header>
+
+    <!-- Ejercicio 1 -->
+    <div class="exercise-card">
+        <span class="level-pill">Radar Ciudadano</span>
+        <h2>📍 1. El Escaneo de Identidad</h2>
+        <p>Analiza la determinación lógica en esta tabla de registros:</p>
+        <div class="schema-box">
+            CIUDADANO (CI, Nombre, Fecha_Nac, Departamento, Capital_Dep)
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-pista" onclick="toggle('pista1')">💡 Pista</button>
+            <button class="btn-respuesta" onclick="toggle('res1')">✅ Ver Respuesta</button>
+        </div>
+
+        <div id="pista1" class="content-hidden pista-box">
+            <strong>Pista:</strong> Utiliza la metáfora de la dirección postal [1]. Si yo te doy un número de CI, ¿puedes decirme el nombre de la persona sin temor a equivocarte? ¿Y si te doy el nombre del departamento, sabrías su capital de forma única? [4].
+        </div>
+        <div id="res1" class="content-hidden respuesta-box">
+            <strong>Solución Técnica:</strong><br>
+            • <strong>CI → Nombre:</strong> Es una relación válida. La CI es el determinante que nos permite saber el nombre sin errores [4].<br>
+            • <strong>Departamento → Capital_Dep:</strong> También es válida. Cada departamento tiene una única capital, por lo que el departamento "gobierna" a la capital [2].
+        </div>
+    </div>
+
+    <!-- Ejercicio 2 -->
+    <div class="exercise-card">
+        <span class="level-pill">Control de Tránsito</span>
+        <h2>🚗 2. Validación de Matrículas</h2>
+        <p>Establece el flujo de información en la tabla de vehículos del registro automotor:</p>
+        <div class="schema-box">
+            VEHÍCULO (Matrícula, Marca, Modelo, Color)
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-pista" onclick="toggle('pista2')">💡 Pista</button>
+            <button class="btn-respuesta" onclick="toggle('res2')">✅ Ver Respuesta</button>
+        </div>
+
+        <div id="pista2" class="content-hidden pista-box">
+            <strong>Pista:</strong> Debate la determinación: ¿La marca depende de la matrícula o la matrícula depende de la marca? Si yo te doy una matrícula, ¿puedes decirme de qué color es el auto sin fallar? [1].
+        </div>
+        <div id="res2" class="content-hidden respuesta-box">
+            <strong>Solución Técnica:</strong><br>
+            La <strong>Matrícula</strong> es el determinante. Las Dependencias Funcionales (esquema de flechas) son:<br>
+            • Matrícula → Marca<br>
+            • Matrícula → Modelo<br>
+            • Matrícula → Color<br>
+            Conocer la matrícula nos permite determinar de forma única todos los demás atributos del vehículo [4].
+        </div>
+    </div>
+
+    <!-- Ejercicio 3 -->
+    <div class="exercise-card">
+        <span class="level-pill">Falla de Red</span>
+        <h2>🏠 3. La Dirección Fantasma</h2>
+        <p>Usa la metáfora postal: el número de puerta es la clave que nos lleva a una única casa [1, 2].</p>
+
+        <div class="btn-group">
+            <button class="btn-pista" onclick="toggle('pista3')">💡 Pista</button>
+            <button class="btn-respuesta" onclick="toggle('res3')">✅ Ver Respuesta</button>
+        </div>
+
+        <div id="pista3" class="content-hidden pista-box">
+            <strong>Pista:</strong> ¿Qué pasaría si una dirección postal nos llevara a dos casas distintas al mismo tiempo? ¿Habría una determinación única? [3].
+        </div>
+        <div id="res3" class="content-hidden respuesta-box">
+            <strong>Solución Técnica:</strong><br>
+            Si una <code>CI</code> nos devolviera dos nombres diferentes, se rompe la <strong>determinación lógica</strong>. Decimos que el sistema "miente" porque no hay una relación unívoca [3, 4]. Esto genera redundancia e inconsistencia, rompiendo la confiabilidad de la base de datos [5].
+        </div>
+    </div>
+
+    <footer>
+        <p>Material de Bases de Datos | Basado en la Teoría de Situaciones Didácticas de Brousseau (1997) y Galperin (1982) [6].</p>
+    </footer>
+</div>
+
+<script>
+    function toggle(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
