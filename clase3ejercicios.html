@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Clase 3: El GPS de los Datos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-soft: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --primary: #0f172a; /* Azul muy oscuro para contraste */
+            --accent: #2563eb; /* Azul para resaltar */
+            --accent-soft: #eff6ff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header-section {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.025em;
+        }
+
+        .header-section p {
+            font-size: 18px;
+            margin-top: 10px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .exercise-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .exercise-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .level-pill {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .exercise-card h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin: 0 0 15px 0;
+        }
+
+        .schema-box {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            color: var(--text-main);
+            border-left: 4px solid var(--accent);
+            text-align: center;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task-list li {
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .task-list li::before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .metaphor-note {
+            background: #fdf2f2;
+            border: 1px solid #fee2e2;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #991b1b;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header-section">
+        <h1>Misión: El GPS de los Datos</h1>
+        <p>Clase 3: Dependencias Funcionales (DF)</p>
+    </header>
+
+    <div class="exercise-stack">
+        <!-- Ejercicio 1 -->
+        <article class="exercise-card">
+            <span class="level-pill">Radar Ciudadano</span>
+            <h2>📍 1. El Escaneo de Identidad</h2>
+            <p>Utilizando la tabla de registros civiles, analiza la determinación de los datos:</p>
+            <div class="schema-box">
+                CIUDADANO (CI, Nombre, Fecha_Nac, Departamento, Capital_Dep)
+            </div>
+            <ul class="task-list">
+                <li><strong>Reto Técnico:</strong> Si te doy un número de CI, ¿puedes decirme el nombre sin temor a equivocarte? Diagrama la flecha <code>A → B</code>.</li>
+                <li><strong>Análisis Lógico:</strong> ¿Existe relación entre Departamento y Capital? Determina quién es el determinante y quién el determinado.</li>
+            </ul>
+        </article>
+
+        <!-- Ejercicio 2 -->
+        <article class="exercise-card">
+            <span class="level-pill">Control de Tránsito</span>
+            <h2>🚗 2. Validación de Matrículas</h2>
+            <p>Analiza el flujo de información en la siguiente estructura de datos:</p>
+            <div class="schema-box">
+                VEHÍCULO (Matrícula, Marca, Modelo, Color)
+            </div>
+            <ul class="task-list">
+                <li><strong>Debate de Determinación:</strong> ¿La Marca depende de la Matrícula o la Matrícula de la Marca? Justifica tu respuesta.</li>
+                <li><strong>Acción:</strong> Dibuja el esquema de flechas completo para todos los atributos que dependan funcionalmente de la Matrícula.</li>
+            </ul>
+        </article>
+
+        <!-- Ejercicio 3 -->
+        <article class="exercise-card">
+            <span class="level-pill">Falla de Red</span>
+            <h2>🏠 3. La Dirección Fantasma</h2>
+            <p>Usando la <strong>metáfora postal</strong>: el número de puerta es la clave que nos lleva a una única casa.</p>
+            <ul class="task-list">
+                <li><strong>Conflicto de Integridad:</strong> Si una <code>CI</code> nos devolviera dos nombres diferentes en el sistema, ¿qué principio de determinación se está rompiendo?.</li>
+                <li><strong>Reflexión:</strong> ¿Por qué decimos que un diseño donde una clave lleva a dos valores distintos "miente" y rompe la consistencia?.</li>
+            </ul>
+            
+            <div class="metaphor-note">
+                <strong>💡 RECUERDA:</strong> Un atributo depende funcionalmente de otro si conocer el primero permite determinar de forma única y sin errores el valor del segundo.
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>Bases de Datos - 2º EMS | Basado en Brousseau (1997) & Galperin (1982)</p>
+    </footer>
+</div>
+
+</body>
+</html>
